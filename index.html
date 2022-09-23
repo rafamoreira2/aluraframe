@@ -12,12 +12,13 @@
     
 </body>
 </html>
-    
+
 </head>
 <body class="container">
     
     <h1 class="text-center">Negociações</h1>
     
+    <div id="mensagemView"></div>
     <form class="form" onsubmit="negociacaoController.adiciona(event)">
         
         <div class="form-group">
@@ -55,7 +56,10 @@
     <script src="client/js/app/controllers/NegociacaoController.js"></script>
     <script src="client/js/app/helpers/DateHelper.js"></script>
     <script src="client/js/app/models/ListaNegociacoes.js"></script>
+    <script src="client/js/app/views/View.js"></script>
     <script src="client/js/app/views/NegociacaoView.js"></script>
+    <script src="client/js/app/models/Mensagem.js"></script>
+    <script src="client/js/app/views/MensagemView.js"></script> 
     <script>
         //instancia um objeto controller.
         let negociacaoController = new NegociacaoController();

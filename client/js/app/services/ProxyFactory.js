@@ -6,18 +6,20 @@ class ProxyFactory{
                 if(props.includes(prop) && ProxyFactory._ehFuncao(target[prop])){
                         return function(){
                         console.log(`${target[prop]} foi interceptado`);
-                        Reflect.apply(target[prop], target, arguments)
-                        return acao(target)
+                        let retorno = Reflect.apply(target[prop], target, arguments)
+                        acao(target)
+                        return retorno
                     }}
 
                 return Reflect.get(target, prop, receiver)
             }, //NECESSÁRIO SEPARAR COM VÍRGULA.
 
             set(target, prop, value, receiver){
-                if(props.includes(prop)){
+                let retorno = Reflect.set(target, prop, value, receiver)
+                if(props.includes(prop))
+                    target[prop] = value;
                     acao(target);
-                }
-                return Reflect.set(target, prop, value, receiver)
+                return retorno
             }
         })
     }

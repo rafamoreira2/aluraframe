@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="client/css/bootstrap.css">
-    <link rel="stylesheet" href="client/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
     <title>Document</title>
 </head>
 <body>
@@ -40,7 +40,7 @@
     </form>
     
     <div class="text-center">
-        <button class="btn btn-primary text-center" type="button">
+        <button class="btn btn-primary text-center" onclick="negociacaoController.importaNegociacoes()" type="button">
             Importar Negociações
         </button>
         <button class="btn btn-primary text-center" type="button" onclick="negociacaoController.esvazia()">
@@ -52,16 +52,17 @@
     <div id="negociacaoView"></div>
 
     
-    <script src="client/js/app/models/Negociacao.js"></script>
-    <script src="client/js/app/controllers/NegociacaoController.js"></script>
-    <script src="client/js/app/helpers/DateHelper.js"></script>
-    <script src="client/js/app/models/ListaNegociacoes.js"></script>
-    <script src="client/js/app/views/View.js"></script>
-    <script src="client/js/app/views/NegociacaoView.js"></script>
-    <script src="client/js/app/models/Mensagem.js"></script>
-    <script src="client/js/app/views/MensagemView.js"></script> 
-    <script src="client/js/app/services/ProxyFactory.js"></script>
-    <script src="client/js/app/services/Bind.js"></script>
+    <script src="/js/app/models/Negociacao.js"></script>
+    <script src="/js/app/controllers/NegociacaoController.js"></script>
+    <script src="/js/app/helpers/DateHelper.js"></script>
+    <script src="/js/app/models/ListaNegociacoes.js"></script>
+    <script src="/js/app/views/View.js"></script>
+    <script src="/js/app/views/NegociacaoView.js"></script>
+    <script src="/js/app/models/Mensagem.js"></script>
+    <script src="/js/app/views/MensagemView.js"></script> 
+    <script src="/js/app/services/ProxyFactory.js"></script>
+    <script src="/js/app/services/Bind.js"></script>
+    <script src="js/app/services/NegociacaoService.js"></script>
     <script>
         let negociacaoController = new NegociacaoController();
     </script>

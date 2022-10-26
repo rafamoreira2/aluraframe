@@ -49,4 +49,15 @@ class NegociacaoController {
         this._inputValor.value = 0.0
         this._inputData.focus()
     }
+    importaNegociacoes(){
+        let service = new NegociacaoService()
+        service.obterNegociacoesDaSemana((error, negociacoes)=>{
+            if(error){
+                this._mensagem.texto = error;
+                return;
+            }
+            negociacoes.forEach(negoc => this._listaNegociacao.adiciona(negoc))
+            this._mensagem.texto = 'Negociações importadas com sucesso'
+        })
+    }
     }

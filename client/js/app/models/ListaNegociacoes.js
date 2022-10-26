@@ -13,4 +13,7 @@ class ListaNegociacoes{
     get negociacoes(){
         return [].concat(this._listaNegociacoes)
     }
+    get volumeTotal(){
+        return this.negociacoes.reduce((total,item) => total + item.volume, 0.0)
+    }
 }

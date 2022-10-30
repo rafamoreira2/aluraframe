@@ -1,21 +1,57 @@
 class NegociacaoService{
-    obterNegociacoesDaSemana(cb){ // cb = (erro, acerto)=>{}
-        let xhr = new XMLHttpRequest()
-        xhr.open('GET', 'negociacoes/semana')
+    	obterNegociacoesDaSemana(){
+        	return new Promise((resolve, reject) =>{
+            let xhr = new XMLHttpRequest()
+            xhr.open('GET', 'negociacoes/semana')
+            xhr.onreadystatechange = ()=>{
 
-        xhr.onreadystatechange = ()=>{
-            if(xhr.readyState == 4){
-                if(xhr.status == 200){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        resolve(JSON.parse(xhr.responseText).map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
+                    }
+                    else{
+                        console.log(xhr.responseText)
+                       reject('Houve um erro na importação das negociações da semana.')
+                    }}} 
+    
+            xhr.send()
+			})
+		}
 
-                    cb(null, JSON.parse(xhr.responseText).map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
-                }
-                else{
-                    console.log(xhr.responseText)
-                   cb('Houve um erro na importação.', null)
-                }
-            }
-        } 
+		obterNegociacoesDaSemanaAnterior(){
+			return new Promise((resolve, reject) =>{
+			 let xhr = new XMLHttpRequest()
+			 xhr.open('GET', 'negociacoes/anterior')
+			 xhr.onreadystatechange = ()=>{
 
-        xhr.send()
-    }
+				  if(xhr.readyState == 4){
+						if(xhr.status == 200){
+							 resolve(JSON.parse(xhr.responseText).map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
+						}
+						else{
+							 console.log(xhr.responseText)
+							reject('Houve um erro na importação das negociações da semana anterior.')
+						}}} 
+  
+			 	xhr.send()
+		 	})
+	 	}
+		obterNegociacoesDaSemanaRetrasada(){
+			return new Promise((resolve, reject) =>{
+			let xhr = new XMLHttpRequest()
+			xhr.open('GET', 'negociacoes/retrasada')
+			xhr.onreadystatechange = ()=>{
+
+				if(xhr.readyState == 4){
+						if(xhr.status == 200){
+							resolve(JSON.parse(xhr.responseText).map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
+						}
+						else{
+							console.log(xhr.responseText)
+							reject('Houve um erro na importação das negociações da semana retrasada.')
+						}}} 
+
+				xhr.send()
+			})
+		}
 }

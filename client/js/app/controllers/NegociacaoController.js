@@ -10,13 +10,14 @@ class NegociacaoController {
         this._listaNegociacao = new Bind(
             new ListaNegociacoes(),
             new NegociacaoView($('#negociacaoView')),
-            'adiciona','esvazia')
+            'adiciona','esvazia','ordena','inverte')
     
         this._mensagem = new Bind(
             new Mensagem(),
             new MensagemView($('#mensagemView')),
             'texto')
-            
+
+        this._ordem = ''
     }
 
     adiciona(event) {
@@ -66,11 +67,16 @@ class NegociacaoController {
                     this._mensagem.texto = 'Negociações importadas com sucesso'
                 })
             }).catch(erro => this._mensagem.texto = erro)
-        /*service.obterNegociacoesDaSemana().then(negociacoes => {
-            negociacoes.forEach(negoc => this._listaNegociacao.adiciona(negoc))
-            this._mensagem.texto = 'Negociações importadas com sucesso'
-    }).catch(erro => this._mensagem.texto = erro)*/
-        
-        
+    }
+    ordena(coluna){
+        if (this._ordem == coluna){
+            this._listaNegociacao.inverte() 
+        }
+        //verifica se a ordem está sendo repetida, e inverte caso esteja.
+        else{
+            this._listaNegociacao.ordena((a, b) => a[coluna] - b[coluna])
+        }
+        this._ordem = coluna;
+        //define a ordem selecionada como atual.
     }
     }
